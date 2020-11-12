@@ -1,0 +1,142 @@
+body{
+    margin:0;
+    padding:0;
+    text-align:left;
+    font-size: 32px;
+}
+header{
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+main{
+    border-bottom:1px solid rgb(214, 201, 175);
+    position:relative;
+}
+footer{
+    background-color: #fff;
+    border-bottom:1px solid #ccc;
+    text-align: center;
+}
+p{
+    font-size:200%;
+    text-align: center;
+    height:200px;
+}
+ul{
+    padding: 0;
+    border-top: 1px solid #000000;
+    display:table;  /* 定義 */
+    table-layout: fixed;
+    width:100%;
+}
+li{
+    list-style-type:none;
+    border: 1px solid rgb(134, 17, 17);
+    background-color: rgb(214, 204, 183);
+    display:table-cell;  /* 定義 */
+    cursor: pointer;
+}
+li:hover{
+    background: #0066CC;
+    color:#fff;
+}
+input,textarea{
+    margin: 3%;
+    width: 95%;
+    font-size:50%;
+    box-shadow: 3px 3px 3px 3px rgb(177, 4, 4);
+}
+input{
+    height: 30px;
+}
+textarea{
+    height: 230px;
+}
+
+
+
+/* ここから自分の */
+/* コピペ逃げるボタン */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  background-color: rgb(31, 31, 31);
+}
+
+button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 4rem;
+  width: 10rem;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 1px 1px 5px black;
+  background-color: rgb(253, 237, 89);
+}
+
+
+button:hover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 8rem;
+  width: 20rem;
+  font-size: 3rem;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 1px 1px 5px black;
+  background-color: rgb(22, 18, 201);
+}
+
+
+/* ウンチブルブル https://q-az.net/buruburu-hurueru-css/*/
+.buruburu {
+    display: inline-block;
+    animation: hurueru 2.5s  infinite;
+}
+
+.buruburu:hover {
+    display: inline-block;
+    animation: hurueru 0.1s  infinite;
+}
+
+@keyframes hurueru {
+    0% {transform: translate(0px, 0px) rotateZ(0deg)}
+    25% {transform: translate(2px, 2px) rotateZ(1deg)}
+    50% {transform: translate(0px, 2px) rotateZ(0deg)}
+    75% {transform: translate(2px, 0px) rotateZ(-1deg)}
+    100% {transform: translate(0px, 0px) rotateZ(0deg)}
+}
+
+
+/* オーディオ自動再生 */
+
+function Init() {
+    let Sound = new Audio();
+        Sound.src = "obake.mp3";
+        Sound.volume = 0.0;
+        Sound.loop = true;
+
+        Sound.onloadeddata = function (Event) {
+            Sound.play();
+
+            let Timer = setInterval(function () {
+                Sound.volume += 0.1;
+
+                if (Sound.volume > 0.9) clearInterval(Timer);
+            }, 100);
+        };
+
+        Sound.load();
+}

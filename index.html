@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>メモパッド課題</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+
+<body onload="Init()">
+    <!-- HTMLここから -->
+    <input class="title" type="text" id="input">
+    <textarea id="text_area"></textarea>
+
+    <!-- リセットボタン -->
+    <input type="reset" id=clear>RESET</input>
+
+    <!-- 逃げるボタン  / 書き込めるボタン -->
+    <button id='runaway-btn'>Click Me 👻</button>
+
+    <span class="buruburu"><span class="buruburu">💩　💩　💩　💩　💩　💩　💩　💩　💩　💩　💩　💩　💩　💩　💩　💩</span>
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <audio preload="auto" src="obake.mp3" autoplay loop></audio>
+ 
+        <!-- HTMLここまで -->
+        <script>
+
+            //ジーズ動画の写経 function処理　アラートを表示
+            function jiyuname() {
+                var str = 'おばけボタンを押して、メモをセーブせよ！';
+                alert(str);
+                var str = 'クリアボタンで全てをリセット！';
+                alert(str);
+                var str = 'うんちを踏まないよう注意！';
+                alert(str);
+            }
+            //関数の外に繰り返しを描く、増やすと繰り返しに
+            jiyuname();
+
+
+            const a = 10;
+            if (a == 10) {
+                alert("白地のメモに書くんだよ～");
+            }
+
+
+
+            // ボタン逃げる　コピペ部分
+            const button = document.getElementById("runaway-btn");
+
+            const animateMove = (element, prop, pixels) =>
+                anime({
+                    targets: element,
+                    [prop]: `${pixels}px`,
+                    easing: "easeOutCirc"
+                });
+
+            ["mouseover", "click"].forEach(function (el) {
+                button.addEventListener(el, function (event) {
+                    const top = getRandomNumber(window.innerHeight - this.offsetHeight);
+                    const left = getRandomNumber(window.innerWidth - this.offsetWidth);
+
+                    animateMove(this, "left", left).play();
+                    animateMove(this, "top", top).play();
+                });
+            });
+
+            const getRandomNumber = (num) => {
+                return Math.floor(Math.random() * (num + 1));
+            };
+
+
+
+
+            // セーブボタン押下でデータ保存。削除。またはローカルストレージからの呼び出し
+            $(function () {
+
+                //1.Save クリックイベント
+                // 写経文
+                $('#runaway-btn').on('click', function () {
+                    var title = $('#input').val();
+                    var text = $('#text_area').val();
+                    var obj = {
+                        "title": title,
+                        "text": text
+                    };
+                    var json = JSON.stringify(obj);
+                    localStorage.setItem('memo02', json);
+                });
+
+
+                //2.clear クリックイベント
+                $('#clear').on('click', function () {
+                    localStorage.removeItem('memo02');
+                    $('#input').val("");
+                    $('#text_area').val("");
+                });
+
+
+                // 3.ページ読みこみ　保存データ取得表示
+                if (localStorage.getItem('memo02')) {
+                    var json_get = localStorage.getItem('memo02');
+                    var obj_get = JSON.parse(json_get);
+                    $('#input').val(obj_get.title);
+                    $('#text_area').val(obj_get.text);
+                }
+
+                // 写経文ここまで
+
+            });
+
+
+
+        </script>
+</body>
+
+</html>
