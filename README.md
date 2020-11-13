@@ -1,5 +1,5 @@
 # 05_08_memo-pad
-
+- https://maru-maru3.github.io/05_08_memo-pad/
 ジーズアカデミー課題提出用　メモパッドアプリ
 
 <気を付けた点>
